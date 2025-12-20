@@ -7,14 +7,14 @@
      database: gonzalo-lara-lewagon
      schema: gz_raw_data
      loader: bigquery
-     freshness:
-       warn_after: {count: 12, period: hour}
      description: gz raw data
      tables:
       - name: sales
         identifier: raw_gz_sales
         description: sales with correct purchase price 
         loaded_at_field: date_date
+        freshness:
+          warn_after: {count: 90, period: day}
         columns:
           - name: date_date
             description: date of purchase
