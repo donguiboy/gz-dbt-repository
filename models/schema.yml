@@ -11,7 +11,12 @@
      tables:
       - name: sales
         identifier: raw_gz_sales
+        description: sales with correct purchase price 
       - name: product
         identifier: raw_gz_product
+        description: product with correct product_id
       - name: ship
         identifier: raw_gz_ship
+        description: ship with correct duplicated values of shipping_fee and ship cost as a float64
+
+      
