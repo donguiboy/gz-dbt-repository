@@ -7,16 +7,56 @@
      database: gonzalo-lara-lewagon
      schema: gz_raw_data
      loader: bigquery
+     freshness:
+       warn_after: {count: 12, period: hour}
      description: gz raw data
      tables:
       - name: sales
         identifier: raw_gz_sales
         description: sales with correct purchase price 
+        loaded_at_field: date_date
+        columns:
+          - name: date_date
+            description: date of purchase
+          - name: orders_id
+            description: orders id
+          - name: products_id
+            description: product id
+          - name: revenue
+            description: revenue per order
+          - name: quantity
+            description: quantity sold
+        tests:
+          - unique:
+              column_name: "(orders_id || '_' || pdt_id)"
+
       - name: product
         identifier: raw_gz_product
         description: product with correct product_id
+        columns:
+          - name: products_id
+            description: product id
+            tests:
+              - unique
+              - not_null
+          - name: purchase_price
+            description: purchase price for each specific product
+            
       - name: ship
         identifier: raw_gz_ship
         description: ship with correct duplicated values of shipping_fee and ship cost as a float64
+        columns:
+          - name: orders_id
+            description: order id
+            tests:
+              - unique
+              - not_null
+          - name: shipping_fee
+            description: shipping fee
+          - name: logcost
+            description: log costs
+          - name: ship_cost
+            description: shipping costs
+          
 
       
