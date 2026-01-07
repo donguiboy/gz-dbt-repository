@@ -29,7 +29,6 @@
         tests:
           - unique:
               column_name: "(orders_id || '_' || pdt_id)"
-
       - name: product
         identifier: raw_gz_product
         description: product with correct product_id
